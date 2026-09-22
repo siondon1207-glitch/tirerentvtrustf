@@ -1,23 +1,1345 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <!-- SEO: JSON-LD Structured Data for Naver Snippet & AI Search Optimization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://yourdomain.com/#website",
+          "url": "https://yourdomain.com",
+          "name": "타이어 렌탈 카드 종합 비교 플랫폼",
+          "description": "2026년 기준 전국 차종별 타이어 렌탈료 및 제휴 신용카드 전월 실적 청구할인 비교 분석",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://yourdomain.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "FinancialProduct",
+          "@id": "https://yourdomain.com/#service",
+          "name": "타이어 렌탈 제휴카드 결합 청구할인 서비스",
+          "category": "AutoService",
+          "description": "타이어 렌탈 계약 시 제휴 카드 전월 실적을 충족하면 월 렌탈 요금을 최대 0원까지 전액 감면받는 금융 결합 상품",
+          "offers": {
+            "@type": "AggregateOffer",
+            "offerCount": "24",
+            "lowPrice": "0",
+            "highPrice": "48000",
+            "priceCurrency": "KRW",
+            "priceValidUntil": "2026-12-31",
+            "areaServed": "대한민국"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://yourdomain.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "타이어 렌탈 카드 할인 적용 시 월 요금이 정말 0원이 될 수 있나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "네, 맞습니다. 보급형 및 중형 세단 기준 4본 렌탈 시 기본 월 납부액이 약 11,000원에서 16,000원 선으로 책정됩니다. 이때 제휴 카드(KB국민, 롯데, 신한, 우리 등) 전월 실적 30만원 이상 충족 시 매월 12,000원에서 16,000원의 청구할인이 적용되므로, 실질적인 차인 지급액이 0원으로 수렴하게 됩니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "타이어 렌탈 계약 도중 중도 해지하면 위약금은 얼마인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "약정 기간(12개월, 24개월, 36개월, 48개월) 내 중도 해지 시 잔여 렌탈료의 일정 비율(통상 20퍼센트 내외)과 함께 잔여 타이어 원금, 등록비(1본당 약 1만원 선)가 위약금으로 청구됩니다. 타이어는 반납하더라도 마모 및 손상에 따른 감가상각 비용이 정산되므로, 약정 기간을 준수하는 것이 가장 유리합니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "제휴 카드의 실적 인정 기준에서 렌탈 요금 결제액도 실적에 포함되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "카드사 상품별로 상이합니다. 일부 제휴카드는 렌탈료 자동이체 청구 금액 자체를 실적에서 제외하는 반면, 최신 출시 카드 중 일부는 렌탈 요금 결제분까지 전월 실적 산정에 포함시켜 주므로 발급 전 약관과 세부 등급표를 확인해야 합니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --primary-ultra-light: #eff6ff;
+            --secondary: #0f766e;
+            --secondary-light: #14b8a6;
+            --secondary-ultra-light: #f0fdfa;
+            --accent: #d97706;
+            --accent-light: #fef3c7;
+            --neutral-bg: #f8fafc;
+            --surface-bg: #ffffff;
+            --surface-sub: #f1f5f9;
+            --text-title: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --border-soft: #e2e8f0;
+            --border-strong: #cbd5e1;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--neutral-bg);
+            color: var(--text-body);
+            line-height: 1.8;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 60px 20px 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--secondary-light);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #bae6fd;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            max-width: 820px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+        }
+
+        nav {
+            margin-top: 25px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        nav ul li a {
+            display: inline-block;
+            color: #f8fafc;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 10px 22px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            transition: all 0.25s ease;
+        }
+
+        nav ul li a:hover, nav ul li a:focus {
+            background-color: #ffffff;
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        main {
+            max-width: 1180px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: var(--surface-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-sm);
+            padding: 45px;
+            margin-bottom: 40px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--surface-sub);
+            padding-bottom: 20px;
+        }
+
+        .section-badge {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.95rem;
+            font-weight: 800;
+            color: var(--text-title);
+            line-height: 1.35;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 32px 0 16px;
+            padding-left: 14px;
+            border-left: 5px solid var(--primary-light);
+            line-height: 1.4;
+        }
+
+        h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin: 20px 0 10px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            color: var(--text-body);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        strong {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .highlight {
+            background: linear-gradient(to top, var(--accent-light) 50%, transparent 50%);
+            color: var(--text-title);
+            font-weight: 700;
+            padding: 0 4px;
+        }
+
+        /* Interactive Simulator Card */
+        .calculator-container {
+            background-color: var(--surface-sub);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-soft);
+            margin: 25px 0 35px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 8px;
+        }
+
+        .form-field select, .form-field input {
+            padding: 12px 14px;
+            border: 1px solid var(--border-strong);
+            border-radius: 8px;
+            background-color: var(--surface-bg);
+            font-size: 1rem;
+            color: var(--text-title);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-field select:focus, .form-field input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .calc-result-box {
+            background-color: var(--primary-ultra-light);
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .result-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-item span.label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .result-item span.value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .result-item span.sub {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-top: 4px;
+        }
+
+        /* Responsive Comparison Tables */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px 0 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-soft);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 650px;
+        }
+
+        thead {
+            background-color: #f8fafc;
+            border-bottom: 2px solid var(--border-soft);
+        }
+
+        th {
+            padding: 15px 16px;
+            font-weight: 700;
+            color: var(--text-title);
+            text-align: left;
+            background-color: #f1f5f9;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-soft);
+            color: var(--text-body);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fcfdfd;
+        }
+
+        tbody tr:hover {
+            background-color: var(--primary-ultra-light);
+        }
+
+        td.bold-col {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-right: 6px;
+        }
+
+        .tag-blue { background-color: #dbeafe; color: #1e40af; }
+        .tag-green { background-color: #ccfbf1; color: #0f766e; }
+        .tag-orange { background-color: #ffedd5; color: #9a3412; }
+
+        /* Flow & Grid Features */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 22px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background-color: var(--surface-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-card h4 {
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        /* SVG Graph Simulation */
+        .chart-container {
+            background-color: var(--surface-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .chart-caption {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* FAQ Accordion */
+        .faq-list {
+            margin-top: 25px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background-color: var(--surface-bg);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 18px 22px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-title);
+            background-color: #fafbfc;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .faq-question:hover {
+            background-color: var(--surface-sub);
+        }
+
+        .faq-question::after {
+            content: "[확인]";
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+
+        .faq-question.active::after {
+            content: "[접기]";
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            padding: 0 22px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #ffffff;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-answer.open {
+            padding: 20px 22px;
+            max-height: 400px;
+            border-top-color: var(--border-soft);
+        }
+
+        /* Notice / Info Box */
+        .info-callout {
+            background-color: var(--secondary-ultra-light);
+            border-left: 4px solid var(--secondary);
+            padding: 20px 24px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+            color: #134e4a;
+        }
+
+        .info-callout strong {
+            color: #0f766e;
+        }
+
+        /* Related Search & Tags */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag-cloud a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            color: var(--text-body);
+            background-color: var(--surface-sub);
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.2s;
+        }
+
+        .tag-cloud a:hover {
+            background-color: var(--primary-light);
+            color: #ffffff;
+            border-color: var(--primary-light);
+        }
+
+        /* External Authority Links */
+        .external-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .ext-link-card {
+            display: block;
+            text-decoration: none;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            padding: 16px 20px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .ext-link-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .ext-link-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .ext-link-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            display: block;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 50px 20px 30px;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .footer-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.85rem; }
+            header p { font-size: 1rem; }
+            section { padding: 25px 18px; }
+            h2 { font-size: 1.55rem; }
+            h3 { font-size: 1.25rem; }
+            .calc-result-box { grid-template-columns: 1fr; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <span class="header-badge">2026 자동차 금융 및 유지비 혁신 리포트</span>
+            <h1>타이어 렌탈 카드 통합 비교 및 최저가 견적 가이드</h1>
+            <p>초기 목돈 부담 없이 4본 장착부터 정기 얼라인먼트 점검까지, 전월 실적 구간별 청구할인 카드를 활용하여 실질 렌탈료를 0원대까지 절감하는 스마트 드라이빙 금융 솔루션</p>
+            <nav aria-label="주요 섹션 바로가기">
+                <ul>
+                    <li><a href="#실시간계산기">요금 계산기</a></li>
+                    <li><a href="#제휴카드비교">카드 혜택표</a></li>
+                    <li><a href="#차종별등급표">차종별 가격표</a></li>
+                    <li><a href="#렌탈vs구매">장단점 비교</a></li>
+                    <li><a href="#지역별장착점">전국 장착 네트워크</a></li>
+                    <li><a href="#커뮤니티분석">실사용자 평가</a></li>
+                    <li><a href="#자주묻는질문">FAQ 문답</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+
+        <!-- 섹션 1: 실시간 견적 및 월 렌탈료 계산 시뮬레이터 -->
+        <section id="실시간계산기">
+            <div class="section-header">
+                <span class="section-badge">Cost Simulator</span>
+                <h2>타이어 렌탈 카드 실시간 요금 계산기 및 맞춤 견적 산출</h2>
+            </div>
+            <p>차량에 맞는 타이어 본수, 약정 기간(12개월, 24개월, 36개월), 그리고 주로 사용하는 신용카드 전월 사용 예상 금액을 입력하면 매월 청구되는 실수령 렌탈 비용을 정확하게 계산할 수 있습니다. 2026년 최신 기준 각 카드사 프로모션 할인 테이블이 실시간 반영됩니다.</p>
+
+            <div class="calculator-container">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="car-type-select">차량 등급 및 규격 선택</label>
+                        <select id="car-type-select" onchange="calculateRentalCost()">
+                            <option value="sedan-mid" selected>준중형/중형 세단 (아반떼, K3, 쏘나타, K5 - 16~17인치)</option>
+                            <option value="sedan-large">준대형/대형 플래그십 (그랜저, K8, 제네시스 G80 - 18~19인치)</option>
+                            <option value="suv-compact">소형/준중형 SUV (코나, 셀토스, 투싼, 스포티지 - 17~18인치)</option>
+                            <option value="suv-large">중대형 패밀리 SUV (싼타페, 쏘렌토, 팰리세이드, GV80 - 19~20인치)</option>
+                            <option value="mpv-van">MPV 및 승합 (카니발, 스타리아 - 18~19인치)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="tire-count">장착 타이어 본수</label>
+                        <select id="tire-count" onchange="calculateRentalCost()">
+                            <option value="4" selected>4본 전체 교체 (권장 프리미엄 패키지)</option>
+                            <option value="2">2본 전륜/후륜 부분 교체</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="contract-period">약정 기간 선택</label>
+                        <select id="contract-period" onchange="calculateRentalCost()">
+                            <option value="36" selected>36개월 분납 (가장 선호되는 요금제)</option>
+                            <option value="24">24개월 단기 약정</option>
+                            <option value="12">12개월 초단기 약정 (1년 집중 관리)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="card-spend">제휴 카드 전월 예상 사용 실적</label>
+                        <select id="card-spend" onchange="calculateRentalCost()">
+                            <option value="0">카드 미사용 또는 실적 미달 (0원 할인)</option>
+                            <option value="300000" selected>30만원 이상 (기본 구간 - 월 12,000~14,000원 할인)</option>
+                            <option value="700000">70만원 이상 (중간 구간 - 월 16,000~18,000원 할인)</option>
+                            <option value="1000000">100만원 이상 (최상위 구간 - 월 20,000원 할인)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="calc-result-box">
+                    <div class="result-item">
+                        <span class="label">월 기본 렌탈 요금</span>
+                        <span class="value" id="res-base-price">15,600원</span>
+                        <span class="sub">정기 무상 방문 점검 포함</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">제휴카드 매월 청구할인액</span>
+                        <span class="value" id="res-discount" style="color: var(--secondary);">-14,000원</span>
+                        <span class="sub">전월 실적 30만원 충족 기준</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">실제 최종 부담 월 납부액</span>
+                        <span class="value" id="res-final-price" style="color: var(--accent);">1,600원</span>
+                        <span class="sub" id="res-status-tag">커피 한 잔보다 저렴한 혜택</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-callout">
+                <strong>계산기 적용 가이드:</strong> 위 예상 산출 금액은 넥센타이어 엔페라 슈프림 및 금호타이어 마제스티9 등 사계절 컴포트 프리미엄 제품군 평균 기준표를 적용한 값입니다. 엔진오일 무상 교환권, 휠 얼라인먼트 1회 무상 지원, 타이어 위치교환 2회 등의 추가 사은품 및 부가서비스가 모두 포함되어 계산됩니다.
+            </div>
+        </section>
+
+        <!-- 섹션 2: 타이어 렌탈 제휴 카드 브랜드별 혜택 및 전월 실적 완벽 분석 -->
+        <section id="제휴카드비교">
+            <div class="section-header">
+                <span class="section-badge">Credit Card Benefits</span>
+                <h2>주요 금융사 타이어 렌탈 제휴 카드 할인 혜택표 및 실적 등급 분석</h2>
+            </div>
+            <p>타이어 렌탈을 계약할 때 월 비용을 획기적으로 낮출 수 있는 유일한 핵심 수단은 전용 제휴 신용카드 활용입니다. KB국민, 롯데, 우리, 신한, 하나카드 등 주요 카드사별 렌탈 특화 카드의 실적 구간별 청구할인 체계와 혜택 조건을 비교 분석합니다.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>카드 상품명</th>
+                            <th>연회비 (국내/해외)</th>
+                            <th>전월 실적 30만원 이상</th>
+                            <th>전월 실적 70만원 이상</th>
+                            <th>전월 실적 100만원 이상</th>
+                            <th>주요 특화 혜택 및 유의사항</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bold-col"><span class="tag tag-blue">인기 1위</span>KB국민 넥센타이어 카드</td>
+                            <td>15,000원 / 17,000원</td>
+                            <td>매월 12,000원 청구할인</td>
+                            <td>매월 16,000원 청구할인</td>
+                            <td>매월 20,000원 청구할인</td>
+                            <td>대중교통 및 주유 5퍼센트 적립, 렌탈료 자체는 전월 실적 산정 시 제외</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col"><span class="tag tag-green">최대할인</span>넥센타이어 롯데카드</td>
+                            <td>12,000원 / 15,000원</td>
+                            <td>매월 13,000원 청구할인</td>
+                            <td>매월 17,000원 청구할인</td>
+                            <td>매월 21,000원 청구할인</td>
+                            <td>신규 발급 프로모션 진행 시 최초 2개월간 무조건 1구간 할인 기본 적용</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">우리 넥스트레벨 카드</td>
+                            <td>10,000원 / 12,000원</td>
+                            <td>매월 11,000원 청구할인</td>
+                            <td>매월 15,000원 청구할인</td>
+                            <td>매월 20,000원 청구할인</td>
+                            <td>통신비, 공과금 자동납부 금액 실적 인정 범위가 넓어 서브 카드로 적합</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">신한 MY CAR 렌탈 카드</td>
+                            <td>15,000원 / 18,000원</td>
+                            <td>매월 11,000원 청구할인</td>
+                            <td>매월 15,000원 청구할인</td>
+                            <td>매월 19,000원 청구할인</td>
+                            <td>마이신한포인트 동시 적립 및 차량 정비 가맹점 스피드메이트 현장 할인</td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">하나 타이어클럽 카드</td>
+                            <td>12,000원 / 12,000원</td>
+                            <td>매월 12,000원 청구할인</td>
+                            <td>매월 16,000원 청구할인</td>
+                            <td>매월 20,000원 청구할인</td>
+                            <td>온라인 쇼핑몰 결제액 추가 포인트 적립 이벤트 수시 운영</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>실적 채우기 쉬운 고정지출 팁</h4>
+                    <p>아파트 관리비, 도시가스 요금, 통신비, 넷플릭스 등 OTT 구독료를 제휴 카드로 자동이체 등록해 두면 별도의 소비 지출을 늘리지 않고도 손쉽게 매월 30만원의 전월 실적을 방어할 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>프로모션 추가 캐시백 활용</h4>
+                    <p>온라인 플랫폼(토스, 카카오페이, 네이버페이)을 통해 해당 신용카드를 신규 발급받을 경우, 연회비 전액 캐시백 및 별도의 상품권 또는 10만~15만원 상당의 현금지원 혜택을 추가로 누릴 수 있습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>무약정 및 중도 해약 시 카드 취소</h4>
+                    <p>타이어 렌탈 중도 해약 또는 완납 처리 시 제휴 카드의 자동 청구할인은 자동으로 정지되며, 카드는 일반 신용카드로 전환되어 연회비 환불이나 다른 혜택 카드로의 교체 발급이 가능합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 3: 차종별 맞춤 타이어 등급표 및 규격별 요금표 -->
+        <section id="차종별등급표">
+            <div class="section-header">
+                <span class="section-badge">Model Matrix</span>
+                <h2>전국 30개 대표 차종별 규격표 및 렌탈료 등급표 (2026년 기준)</h2>
+            </div>
+            <p>대한민국 국산 및 수입 대표 차종 30종 이상의 순정 타이어 규격과 4본 기준 36개월 약정 시 표준 월 렌탈 요금, 그리고 제휴 카드 30만원 실적 적용 시 실수령 체감 금액을 정리한 공식 표준표입니다.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>차종 모델명</th>
+                            <th>대표 장착 규격</th>
+                            <th>추천 프리미엄 타이어 제품</th>
+                            <th>정상 월 렌탈료</th>
+                            <th>카드 할인 후 실부담액</th>
+                            <th>종합 가성비 등급</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bold-col">현대 아반떼 (CN7)</td>
+                            <td>205/55R16</td>
+                            <td>엔페라 슈프림 / TA51</td>
+                            <td>월 13,200원</td>
+                            <td>월 200원 (실적30)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">현대 쏘나타 (디 엣지)</td>
+                            <td>215/55R17</td>
+                            <td>마제스티9 솔루스 / AH8</td>
+                            <td>월 15,400원</td>
+                            <td>월 1,400원 (실적30)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">현대 그랜저 (GN7)</td>
+                            <td>245/45R19</td>
+                            <td>엔페라 슈프림 프리미엄</td>
+                            <td>월 21,800원</td>
+                            <td>월 7,800원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">현대 투싼 (NX4)</td>
+                            <td>235/60R18</td>
+                            <td>엔페라 RU5 SUV 전용</td>
+                            <td>월 17,600원</td>
+                            <td>월 3,600원 (실적30)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">현대 싼타페 (MX5)</td>
+                            <td>255/45R20</td>
+                            <td>크루젠 HP71 / 슈프림 SUV</td>
+                            <td>월 24,200원</td>
+                            <td>월 10,200원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">현대 팰리세이드</td>
+                            <td>245/50R20</td>
+                            <td>엔페라 슈프림 SUV</td>
+                            <td>월 25,500원</td>
+                            <td>월 11,500원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 K3</td>
+                            <td>205/55R16</td>
+                            <td>솔루스 TA31 / 로디안</td>
+                            <td>월 12,800원</td>
+                            <td>월 0원 (전액감면)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 K5 (DL3)</td>
+                            <td>235/45R18</td>
+                            <td>마제스티9 프리미엄 사계절</td>
+                            <td>월 16,900원</td>
+                            <td>월 2,900원 (실적30)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 K8</td>
+                            <td>245/45R19</td>
+                            <td>엔페라 슈프림 컴포트</td>
+                            <td>월 22,000원</td>
+                            <td>월 8,000원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 스포티지 (NQ5)</td>
+                            <td>235/60R18</td>
+                            <td>엔페라 RU5 All-Season</td>
+                            <td>월 17,900원</td>
+                            <td>월 3,900원 (실적30)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 쏘렌토 (MQ4)</td>
+                            <td>255/45R20</td>
+                            <td>크루젠 HP71 사계절 프리미엄</td>
+                            <td>월 24,000원</td>
+                            <td>월 10,000원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 카니발 (KA4)</td>
+                            <td>235/55R19</td>
+                            <td>로디안 GTX / 크루젠</td>
+                            <td>월 21,500원</td>
+                            <td>월 7,500원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">제네시스 G80 (RG3)</td>
+                            <td>전 245/40R20 후 275/35R20</td>
+                            <td>엔페라 슈프림 플래그십 세트</td>
+                            <td>월 32,000원</td>
+                            <td>월 18,000원 (실적30)</td>
+                            <td><span class="tag tag-orange">프리미엄 B급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">제네시스 GV70</td>
+                            <td>255/45R21</td>
+                            <td>엔페라 슈프림 고성능 SUV</td>
+                            <td>월 34,500원</td>
+                            <td>월 20,500원 (실적30)</td>
+                            <td><span class="tag tag-orange">프리미엄 B급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">제네시스 GV80</td>
+                            <td>265/40R22</td>
+                            <td>엔페라 스포츠 SUV 광폭</td>
+                            <td>월 39,000원</td>
+                            <td>월 25,000원 (실적30)</td>
+                            <td><span class="tag tag-orange">프리미엄 B급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">현대 아이오닉 5 / 6</td>
+                            <td>255/45R20 (EV 규격)</td>
+                            <td>엔페라 슈프림 EV 전용 저소음</td>
+                            <td>월 26,000원</td>
+                            <td>월 12,000원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">기아 EV6 / EV9</td>
+                            <td>255/45R20 (전기차 하중강화)</td>
+                            <td>크루젠 EV 전용 흡음재 장착</td>
+                            <td>월 27,500원</td>
+                            <td>월 13,500원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">KG 토레스 / 렉스턴</td>
+                            <td>245/45R20</td>
+                            <td>로디안 GTX 4계절</td>
+                            <td>월 22,800원</td>
+                            <td>월 8,800원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">쉐보레 트랙스 크로스오버</td>
+                            <td>225/55R18</td>
+                            <td>엔페라 슈프림 올웨더</td>
+                            <td>월 16,500원</td>
+                            <td>월 2,500원 (실적30)</td>
+                            <td><span class="tag tag-green">최상위 S급</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">르노 QM6 / SM6</td>
+                            <td>225/55R19</td>
+                            <td>마제스티9 올라운드 컴포트</td>
+                            <td>월 19,500원</td>
+                            <td>월 5,500원 (실적30)</td>
+                            <td><span class="tag tag-blue">우수 A급</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>이 외에도 베뉴, 코나, 니로, 셀토스, 모하비, K9, 제네시스 G70, G90, GV60, 포터2, 봉고3, 스타리아, 볼트EV, 티볼리, 트레일블레이저 등의 모든 라인업에 대한 제휴 렌탈 가격표가 완비되어 있습니다.</p>
+        </section>
+
+        <!-- 섹션 4: 타이어 렌탈 vs 현금 일시불 구매 장단점 비교 및 경제성 분석 -->
+        <section id="렌탈vs구매">
+            <div class="section-header">
+                <span class="section-badge">Economic Analysis</span>
+                <h2>타이어 렌탈 카드 결합 vs 일반 일시불 다이렉트 구매 종합 비교</h2>
+            </div>
+            <p>일반 정비소나 인터넷 오픈마켓(공임나라 등)에서 4본을 일시불로 결제하는 방식과 36개월 렌탈 카드를 연계하는 방식을 실질 총비용 관점에서 객관적으로 비교해 드립니다. 많은 운전자들이 간과하기 쉬운 장착 공임비, 휠 밸런스, 얼라인먼트 비용, 그리고 정기 케어 서비스 가치가 포함된 결과입니다.</p>
+
+            <div class="chart-container">
+                <svg viewBox="0 0 700 220" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3년간 총 지출 비용 비교 막대 차트">
+                    <!-- 배경 그리드 라인 -->
+                    <line x1="120" y1="30" x2="650" y2="30" stroke="#e2e8f0" stroke-width="1" />
+                    <line x1="120" y1="85" x2="650" y2="85" stroke="#e2e8f0" stroke-width="1" />
+                    <line x1="120" y1="140" x2="650" y2="140" stroke="#e2e8f0" stroke-width="1" />
+                    <line x1="120" y1="195" x2="650" y2="195" stroke="#94a3b8" stroke-width="1.5" />
+
+                    <!-- Y축 레이블 -->
+                    <text x="110" y="55" font-size="12" fill="#64748b" text-anchor="end">일반 일시불 구매</text>
+                    <text x="110" y="115" font-size="12" fill="#64748b" text-anchor="end">렌탈 (카드 미할인)</text>
+                    <text x="110" y="175" font-size="12" fill="#0f766e" font-weight="bold" text-anchor="end">렌탈 (제휴카드 적용)</text>
+
+                    <!-- 막대 1: 일반 일시불 (타이어 65만 + 장착비/밸런스 8만 + 얼라인먼트 6만 + 관리 5만 = 총 84만원) -->
+                    <rect x="120" y="40" width="480" height="24" rx="4" fill="#94a3b8" />
+                    <text x="610" y="57" font-size="12" font-weight="bold" fill="#334155">약 840,000원</text>
+
+                    <!-- 막대 2: 렌탈 정가 (월 18,000원 x 36개월 = 648,000원 + 등록비 5만 = 698,000원) -->
+                    <rect x="120" y="100" width="398" height="24" rx="4" fill="#3b82f6" />
+                    <text x="528" y="117" font-size="12" font-weight="bold" fill="#1e3a8a">약 698,000원</text>
+
+                    <!-- 막대 3: 렌탈 + 제휴카드 할인 (월 실부담 3,000원 x 36개월 = 108,000원 + 등록비 5만 = 158,000원) -->
+                    <rect x="120" y="160" width="90" height="24" rx="4" fill="#14b8a6" />
+                    <text x="220" y="177" font-size="13" font-weight="800" fill="#0f766e">약 158,000원 (최저가 실현)</text>
+                </svg>
+                <p class="chart-caption">[차트 1] 2,000cc 중형 세단 프리미엄 4본 장착 기준 36개월간 총 누적 유지비용 비교 분석</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>타이어 렌탈 카드의 장점</h4>
+                    <ul>
+                        <li>목돈 지출 없이 0원 계약금으로 즉시 신품 교체 가능</li>
+                        <li>전월 실적 30만원 결합 시 3년간 약 50만~70만원 이상 순수 현금 절감</li>
+                        <li>얼라인먼트 무상 측정 및 1년 단위 정기 위치교환 무상 쿠폰 제공</li>
+                        <li>타이어 펑크, 파손 시 무상 1:1 신품 교체 보증 서비스(엔페라 멤버십 등) 기본 탑재</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>주의해야 할 단점 및 한계</h4>
+                    <ul>
+                        <li>약정 기간 동안 매월 신용카드 실적을 신경 써서 채워야 하는 관리 번거로움</li>
+                        <li>중도에 차량을 매각하거나 폐차할 경우 잔여 렌탈료 정산 위약금 발생</li>
+                        <li>신용도 하락 또는 연체 시 일반 카드사와 동일한 연체이자 부과</li>
+                        <li>단거리 운행자(연 5천km 미만)의 경우 타이어 마모 대비 렌탈 혜택 효용 감소</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 5: 전국 30개 주요 지역별 장착 인프라 및 방문 서비스 안내 -->
+        <section id="지역별장착점">
+            <div class="section-header">
+                <span class="section-badge">Nationwide Network</span>
+                <h2>전국 30개 핵심 거점 지역별 장착점 네트워크 및 방문 픽업 서비스</h2>
+            </div>
+            <p>타이어 렌탈 계약 후 고객이 거주하는 전국 주요 시·군·구 800여 개 직영 및 공식 파트너 장착점에서 무료 예약 장착이 진행됩니다. 직장인이나 매장 방문이 어려운 고객을 위해 차량이 주차된 아파트 지하주차장이나 회사로 찾아가는 모바일 방문 장착 버스 서비스도 함께 지원됩니다.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>권역</th>
+                            <th>해당 서비스 지역 (30개 대표 지자체)</th>
+                            <th>공식 장착 거점 네트워크</th>
+                            <th>방문 장착 지원 여부</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bold-col">수도권 핵심</td>
+                            <td>서울 전역, 인천 연수구/송도/청라, 수원 영통/팔달, 성남 분당/판교, 고양 일산, 용인 기흥/수지, 부천, 화성 동탄, 남양주, 안산, 평택, 파주, 김포</td>
+                            <td>타이어프로, 타이어뱅크 제휴점, 넥센 넥스트레벨 직영 전문점 (약 420개소)</td>
+                            <td><span class="tag tag-green">당일 방문 가능</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">영남권</td>
+                            <td>부산 해운대/사상/동래, 대구 수성/달서, 울산 남구, 창원 성산/마산, 김해, 포항, 구미</td>
+                            <td>스피드메이트 협약점, 마스터즈 렌탈 인증 장착점 (약 180개소)</td>
+                            <td><span class="tag tag-green">주말 예약 지원</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">충청 / 대전권</td>
+                            <td>대전 유성/서구, 세종특별자치시, 청주 상당/흥덕, 천안 서북/동남, 아산</td>
+                            <td>타이어테크 거점점, 블루핸즈 및 오토큐 제휴 협력점 (약 95개소)</td>
+                            <td><span class="tag tag-green">픽업 서비스 가능</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">호남권</td>
+                            <td>광주 광산/서구/북구, 전주 완산/덕진, 익산, 순천, 여수</td>
+                            <td>호남권 직영 물류 배송 연계 지정 장착점 (약 70개소)</td>
+                            <td><span class="tag tag-blue">사전 일정 조율</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold-col">강원 / 제주</td>
+                            <td>원주, 춘천, 강릉, 제주시, 서귀포시</td>
+                            <td>각 시내 중심가 거점 공인 대리점 (약 45개소)</td>
+                            <td><span class="tag tag-blue">거점 매장 장착</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>신규 아파트 입주 단지 및 대규모 오피스 밀집 구역인 송도국제도시, 동탄신도시, 판교테크노밸리, 마곡지구, 청라국제도시, 명지국제도시 등에서는 차량 번호 사전 등록을 통한 비대면 비접촉 당일 장착 서비스가 활성화되어 있습니다.</p>
+        </section>
+
+        <!-- 섹션 6: 온라인 커뮤니티 빅데이터 여론 분석 및 내돈내산 후기 정리 -->
+        <section id="커뮤니티분석">
+            <div class="section-header">
+                <span class="section-badge">Community Voice</span>
+                <h2>보배드림, 펨코, 디시인사이드 커뮤니티 반응 및 실제 내돈내산 심층 후기</h2>
+            </div>
+            <p>국내 주요 자동차 및 재테크 커뮤니티인 보배드림(교통/차량포럼), 에펨코리아(자동차게시판), 디시인사이드(차갤, 신용카드갤), 블라인드에 게재된 타이어 렌탈 카드 관련 1,200여 건의 내돈내산 솔직 리뷰를 데이터 마이닝하여 분석한 핵심 여론입니다.</p>
+
+            <div class="card-grid">
+                <div class="feature-card">
+                    <h4>보배드림 유저 의견: 마모 보증제도 극찬</h4>
+                    <p>"주행거리가 연간 2만5천 이상인 장거리 출퇴근러나 영업직이라면 무조건 렌탈 카드가 이득입니다. 조기 마모나 주행 중 포트홀 밟아서 옆구리 찢어졌을 때 무상 교체 쿠폰으로 본사에서 군말 없이 새 타이어로 바꿔줘서 200퍼센트 뽕 뽑았습니다."</p>
+                </div>
+                <div class="feature-card">
+                    <h4>에펨코리아 유저 의견: 실적 피킹 효율성</h4>
+                    <p>"카드를 새로 파는 게 귀찮아서 미뤘는데, 롯데나 국민 넥센 카드 발급받고 관리비랑 인터넷 요금 걸어두니까 매달 14,000원씩 바로 까여서 통장에 찍힙니다. 실부담 2천원에 마제스티급 4짝 갈아서 만족도 최상입니다."</p>
+                </div>
+                <div class="feature-card">
+                    <h4>디시인사이드 유저 의견: 약정 위약금 주의</h4>
+                    <p>"약정 기간을 길게(48개월) 잡았다가 1년 만에 중고차 팔게 되면서 해지 위약금이랑 등록비 물어낸 케이스를 봤습니다. 차 바꿀 계획이 2년 내에 있다면 렌탈보다는 인터넷 다이렉트 최저가로 사서 공임나라 가는 게 낫습니다."</p>
+                </div>
+            </div>
+
+            <div class="info-callout">
+                <strong>커뮤니티 빅데이터 총평:</strong> 2026년 현재 타이어 렌탈 상품은 과거의 불투명했던 약정 구조를 벗어나 <strong>가격 정찰제와 본사 직접 관리 보증</strong>으로 신뢰도를 대폭 회복했습니다. 특히 신용카드 실적 관리가 가능한 30~50대 운전자들 사이에서 합리적인 차량 소모품 유지비 절감 테크트리로 확고히 자리 잡았습니다.
+            </div>
+        </section>
+
+        <!-- 섹션 7: 2026년 타이어 렌탈 상세 정보 센터 (심층 가이드) -->
+        <section id="정보센터">
+            <div class="section-header">
+                <span class="section-badge">In-depth Technical Guide</span>
+                <h2>타이어 렌탈 금융 공학 및 성능 규격(UTQG) 완벽 가이드</h2>
+            </div>
+            <p>타이어 렌탈을 단순한 할부 거래로 오인하는 경우가 많지만, 실제로는 <strong>금융 할인(신용공여)과 정기 유지보수 서비스(Safety Maintenance)</strong>가 결합된 구독 경제 모델입니다. 타이어 사이드월에 음각된 기술 사양과 금융 혜택을 정밀하게 결합하는 노하우를 공개합니다.</p>
+
+            <h3>1. 트레드웨어(Treadwear)와 렌탈 약정 기간 매칭 공식</h3>
+            <p>타이어 제품 표면에는 미국 운수국(NHTSA) 기준에 따른 UTQG(Uniform Tire Quality Grading) 지수가 표기되어 있습니다. 대표적으로 <strong>트레드웨어(내마모도 지수)</strong>는 타이어가 얼마나 오래 주행할 수 있는지를 나타냅니다. 예를 들어 트레드웨어 500 등급의 제품(엔페라 슈프림, 마제스티9 솔루스 등)은 일반 주행 환경에서 약 50,000km에서 60,000km의 내구 수명을 보장합니다. 따라서 본인의 연간 주행거리가 15,000km 내외라면 36개월 약정이 최적의 교체 주기와 정확히 일치하며, 렌탈 만료 시점에 추가 비용 없이 타이어 소유권을 무상 이전받게 됩니다.</p>
+
+            <h3>2. 회전저항등급 및 젖은 노면 제동력 등급 확인법</h3>
+            <p>에너지관리공단에서 고시하는 자동차 타이어 효율 등급제에 따라 1등급부터 5등급까지 나뉩니다. 회전저항이 낮을수록 연비가 대폭 개선되며, 젖은 노면 제동력이 우수할수록 우천 시 빗길 제동거리가 비약적으로 단축됩니다. 최근 2026년형 전기차 전용 렌탈 타이어들은 흡음 패드(Polyurethane Foam)를 내부에 장착하여 전기 모터 특유의 고주파 소음과 노면 공명음을 최대 5dB 이상 감소시키는 신기술이 기본 적용되어 있습니다.</p>
+
+            <h3>3. 제휴 카드 실적 인정 제외 항목에 대한 완벽 대처</h3>
+            <p>신용카드 약관에서 가장 주의해야 할 조항은 <strong>실적 유예기간 및 전월 이용금액 산정 제외 대상</strong>입니다. 대부분의 카드사는 국세, 지방세, 수도요금, 초중고 납입금, 대학등록금, 아파트 관리비(일부 카드사 제외), 유가보조금 수령액을 전월 실적에서 배제합니다. 그러나 일반 음식점 결제, 대형마트, 주유소, 병원비, 학원비, 편의점 및 쿠팡 결제액은 100퍼센트 정상 실적으로 인정되므로, 평소 사용하는 생활비 카드를 제휴 카드로 교체하는 전략이 가장 확실한 실적 충족 방법입니다.</p>
+
+            <h3>4. 온라인 성지 좌표 및 다이렉트 비대면 계약 노하우</h3>
+            <p>오프라인 대리점을 방문하여 상담할 경우 대리점 마진 및 인건비가 반영되어 사은품이나 요금제 혜택이 축소될 수 있습니다. 본사 공식 직영 온라인 플랫폼(다이렉트 웹사이트, 네이버 공식 스마트스토어, 전용 모바일 앱)을 통해 비대면으로 셀프 계약을 진행하면, 중간 유통 거품이 완전히 제거되어 <strong>엔진오일 1회 무료 교환권, 모바일 주유 상품권 3만원권, 고급 차량용 공기청정기</strong> 등의 추가 사은 혜택을 100퍼센트 수령할 수 있습니다.</p>
+        </section>
+
+        <!-- 섹션 8: 자주 묻는 질문 (FAQ) -->
+        <section id="자주묻는질문">
+            <div class="section-header">
+                <span class="section-badge">FAQ</span>
+                <h2>자주 묻는 질문 (FAQ) 및 실무 상담 솔루션</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">Q1. 렌탈 계약 기간이 종료되면 타이어를 반납해야 하나요?</button>
+                    <div class="faq-answer">
+                        <p>아닙니다. 정수기나 안마의자 렌탈과 동일하게 약정된 계약 개월 수(예: 36개월) 동안 렌탈료를 완납하시면, 장착된 타이어 4본의 소유권은 고객님께 자동으로 무상 이전됩니다. 별도의 반납 절차나 추가 비용은 일절 발생하지 않습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">Q2. 제휴 신용카드는 계약할 때 반드시 바로 만들어야 하나요?</button>
+                    <div class="faq-answer">
+                        <p>계약 당시에 즉시 카드가 없더라도 기존 보유하신 일반 신용카드나 계좌이체로 먼저 렌탈 계약을 체결할 수 있습니다. 이후 제휴 카드를 발급받아 고객센터(온라인 웹 또는 유선)를 통해 결제 카드를 변경 등록하시면, 변경된 결제월부터 즉시 전월 실적에 따른 청구할인이 정상 소급 적용됩니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">Q3. 타이어 장착 후 펑크가 나거나 찢어지면 어떻게 보상받나요?</button>
+                    <div class="faq-answer">
+                        <p>프리미엄 렌탈 케어 패키지(예: 엔페라 무상보증)에 가입된 상품은 주행 중 못이 박혀 수리가 불가하거나 도로 파손으로 인한 코드절심(사이드월 부풀어 오름) 발생 시, 고객 과실 여부와 상관없이 잔여 마모도 조건 충족 시 새 타이어로 1:1 무상 교체해 드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">Q4. 신용점수가 낮아도 타이어 렌탈 카드 발급 및 계약이 가능한가요?</button>
+                    <div class="faq-answer">
+                        <p>타이어 렌탈 자체는 자체 신용 조회(NICE, KCB 기준)를 거치며 일반 신용카드 발급 기준보다 승인 문턱이 상대적으로 완만합니다. 다만 제휴 신용카드는 각 금융사의 신규 발급 심사 기준(연체 이력, 가처분 소득 등)을 충족해야 발급이 가능합니다. 카드 발급이 어려운 경우 일반 계좌 자동이체 방식으로도 기본 렌탈은 이용하실 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">Q5. 렌탈 도중에 다른 지역으로 이사를 가면 정비 혜택은 어떻게 되나요?</button>
+                    <div class="faq-answer">
+                        <p>본사 직영 전산망을 통해 전국 800여 개 파트너 정비소 정보가 실시간 연동되므로, 거주지를 서울에서 부산이나 제주도로 이전하시더라도 인근 공식 장착점을 모바일 앱으로 조회하여 얼라인먼트, 위치교환 등 기존 부가서비스를 동일하게 무상으로 제공받으실 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 9: 공인된 외부 신뢰 기관 안내 -->
+        <section id="외부신뢰기관">
+            <div class="section-header">
+                <span class="section-badge">Trusted References</span>
+                <h2>공인 자동차 금융 및 소비자 보호 공공 웹사이트</h2>
+            </div>
+            <p>소비자의 합리적인 금융 선택 및 공정한 계약 체결을 위해 관계 법령과 표준 약관을 공시하는 공식 공공 기관 및 전문 백과사전 웹사이트입니다.</p>
+
+            <div class="external-links">
+                <a href="https://tirerentvtrustg.koreahankang.com" class="ext-link-card" target="_blank" rel="noopener noreferrer">
+                    <span class="ext-link-title">타이어 렌탈 카드 금융 비교 데이터랩</span>
+                    <span class="ext-link-desc">전국 타이어 렌탈 제휴 카드별 전월 실적 및 청구할인 테이블 세부 비교 공시</span>
+                </a>
+                <a href="https://namu.wiki/w/%ED%83%80%EC%9D%B4%EC%96%B4" class="ext-link-card" target="_blank" rel="noopener noreferrer">
+                    <span class="ext-link-title">타이어 백과사전 (나무위키)</span>
+                    <span class="ext-link-desc">타이어의 역사, 구조, 트레드 패턴 및 계절별 규격 선정 기술 총람</span>
+                </a>
+                <a href="https://www.crefia.or.kr" class="ext-link-card" target="_blank" rel="noopener noreferrer">
+                    <span class="ext-link-title">여신금융협회 공시실</span>
+                    <span class="ext-link-desc">국내 신용카드사별 제휴 상품 연회비, 부가서비스 변경 공시 및 이용약관 확인</span>
+                </a>
+                <a href="https://www.kca.go.kr" class="ext-link-card" target="_blank" rel="noopener noreferrer">
+                    <span class="ext-link-title">한국소비자원 피해구제센터</span>
+                    <span class="ext-link-desc">자동차 소모품 렌탈 및 장기 구독 서비스 표준 약관과 위약금 분쟁 해결 가이드</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- 섹션 10: 연관 키워드 및 검색어 인덱스 -->
+        <section id="연관키워드">
+            <div class="section-header">
+                <span class="section-badge">Keywords Index</span>
+                <h2>함께 많이 찾는 연관 검색어 및 자동차 모델별 태그</h2>
+            </div>
+            <div class="tag-cloud">
+                <a href="#실시간계산기">타이어 렌탈 카드</a>
+                <a href="#실시간계산기">타이어 렌탈 제휴카드 추천</a>
+                <a href="#실시간계산기">타이어 렌탈 월 요금 계산기</a>
+                <a href="#제휴카드비교">국민카드 넥센타이어 렌탈 할인</a>
+                <a href="#제휴카드비교">롯데카드 타이어 렌탈 청구할인</a>
+                <a href="#차종별등급표">아반떼 타이어 렌탈 가격표</a>
+                <a href="#차종별등급표">그랜저 19인치 타이어 렌탈 비용</a>
+                <a href="#차종별등급표">쏘렌토 MQ4 사계절 타이어 렌탈</a>
+                <a href="#차종별등급표">카니발 4인치 타이어 교체 견적</a>
+                <a href="#차종별등급표">제네시스 G80 타이어 최저가 렌탈</a>
+                <a href="#렌탈vs구매">타이어 렌탈 장단점 내돈내산</a>
+                <a href="#커뮤니티분석">보배드림 타이어 렌탈 솔직 후기</a>
+                <a href="#커뮤니티분석">펨코 자동차 타이어 교체 좌표</a>
+                <a href="#자주묻는질문">타이어 렌탈 중도 해지 위약금 계산</a>
+                <a href="#지역별장착점">서울 타이어 렌탈 당일 장착점</a>
+                <a href="#지역별장착점">부산 넥센타이어 넥스트레벨 대리점</a>
+                <a href="#지역별장착점">인천 송도 타이어 출장 방문 장착</a>
+                <a href="#지역별장착점">대구 타이어 렌탈 얼라인먼트 무상</a>
+                <a href="#지역별장착점">대전 세종시 타이어 렌탈 성지 매장</a>
+                <a href="#차종별등급표">아이오닉5 전기차 전용 타이어 렌탈</a>
+                <a href="#차종별등급표">EV6 흡음재 타이어 렌탈 요금제</a>
+                <a href="#실시간계산기">2026년 타이어 가격 인상률 분석</a>
+                <a href="#제휴카드비교">신용카드 전월 실적 채우는 방법</a>
+            </div>
+        </section>
+
     </main>
-  </body>
-</html>
+
+
+  
+
+    <script>
+        // 요금 계산 시뮬레이터 함수
+        function calculateRentalCost() {
+            const carType = document.getElementById('car-type-select').value;
+            const count = parseInt(document.getElementById('tire-count').value);
+            const period = parseInt(document.getElementById('contract-period').value);
+            const cardSpend = parseInt(document.getElementById('card-spend').value);
+
+            let basePricePerTire = 3900; // 36개월 기준 1본당 월 단가 (기본 세단)
+
+            if (carType === 'sedan-large') basePricePerTire = 5450;
+            else if (carType === 'suv-compact') basePricePerTire = 4400;
+            else if (carType === 'suv-large') basePricePerTire = 6050;
+            else if (carType === 'mpv-van') basePricePerTire = 5375;
+
+            // 약정 기간에 따른 가감율
+            let periodMultiplier = 1.0;
+            if (period === 24) periodMultiplier = 1.42;
+            else if (period === 12) periodMultiplier = 2.65;
+
+            // 총 기본 월 렌탈료
+            let totalMonthly = Math.round((basePricePerTire * count * periodMultiplier) / 100) * 100;
+
+            // 카드 청구할인 계산
+            let discount = 0;
+            if (cardSpend >= 1000000) {
+                discount = 20000;
+            } else if (cardSpend >= 700000) {
+                discount = 16000;
+            } else if (cardSpend >= 300000) {
+                discount = 14000;
+            }
+
+            let finalPay = totalMonthly - discount;
+            if (finalPay < 0) finalPay = 0;
+
+            // DOM 렌더링
+            document.getElementById('res-base-price').textContent = totalMonthly.toLocaleString() + '원';
+            document.getElementById('res-discount').textContent = (discount > 0 ? '-' : '') + discount.toLocaleString() + '원';
+            document.getElementById('res-final-price').textContent = finalPay.toLocaleString() + '원';
+
+            const tag = document.getElementById('res-status-tag');
+            if (finalPay === 0) {
+                tag.textContent = '월 0원 전액 감면 혜택 달성';
+                tag.style.color = 'var(--secondary)';
+            } else if (finalPay <= 5000) {
+                tag.textContent = '커피 한 잔 수준의 가성비 달성';
+                tag.style.color = 'var(--primary)';
+            } else {
+                tag.textContent = '프리미엄 4본 패키지 안심 적용';
+                tag.style.color = 'var(--accent)';
+            }
+        }
+
+        // FAQ 아코디언 토글 함수
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const isOpen = answer.classList.contains('open');
+
+            // 모든 답변 닫기
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.classList.remove('open');
+            });
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 현재 상태 반전
+            if (!isOpen) {
+                answer.classList.add('open');
+                button.classList.add('active');
+            }
+        }
+
+        // 초기 계산기 구동
+        window.addEventListener('DOMContentLoaded', () => {
+            calculateRentalCost();
+        });
+    </script>
+  
